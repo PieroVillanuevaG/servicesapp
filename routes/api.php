@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\EmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +19,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('users')->group(function () {
-    Route::post('verify', 'UsuariosController@userVerify');
+Route::group(['middleware' => ['cors']], function () {
+    Route::prefix('users')->group(function () {
+        Route::post('verify', 'UsuariosController@userVerify');
+    });
 });
 
 Route::prefix('doctors')->group(function () {
     Route::post('search', 'DoctorsController@searchDoctor');
 });
+
+Route::get('message', 'EmailController@sendEmail');
+

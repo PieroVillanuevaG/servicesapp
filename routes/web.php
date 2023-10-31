@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\UsuarioController;
 use \App\Http\Controllers\CustomerController;
 use \App\Http\Controllers\DoctorsController;
+use \App\Mail\MailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
