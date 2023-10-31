@@ -42,7 +42,12 @@ class UsuariosController extends Controller
             return response()->json(["status" => false, "message" => "El usuario se encuentra inhabilitado"], 200);
         }
 
-        return response()->json(["status" => true, "message" => "Usuario encontrado"], 200);
+        $customer = DB::table('customer')
+            ->where("id", $verify->customer_id)
+            ->first();
+
+
+        return response()->json(["status" => true, "message" => "Usuario encontrado","data"=> $customer], 200);
 
     }
 
