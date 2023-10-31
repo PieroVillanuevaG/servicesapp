@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\UsuarioController;
 use \App\Http\Controllers\CustomerController;
 use \App\Http\Controllers\DoctorsController;
+use \App\Http\Controllers\CitaController;
 use \App\Mail\MailController;
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+/** APP CMI CESAR LOPEZ SILVA*/
+
 Route::resource('user', UsuariosController::class);
 Route::resource('customer', CustomerController::class);
 Route::resource('doctor', DoctorsController::class);
+Route::resource('cita', CitaController::class);
+
+
+/** APP CONTROL DE STOCK */
+

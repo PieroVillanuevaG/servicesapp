@@ -7,12 +7,8 @@ use Illuminate\Http\Request;
 
 class EmailController extends Controller
 {
-    public function sendEmail()
+    public function sendEmail($email, $objOverskull, $subject)
     {
-
-        $email = "pierog@overskull.pe";
-        $objOverskull = [];
-        $subject = 'PRUEBA';
         $view = "mail.mail";
         $send = \Mail::to($email)->send(new MailController($objOverskull, $subject, $view));
         if ($send) {

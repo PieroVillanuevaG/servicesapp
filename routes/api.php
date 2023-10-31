@@ -19,15 +19,41 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+/** APP CMI CESAR LOPEZ SILVA*/
+
 Route::group(['middleware' => ['cors']], function () {
     Route::prefix('users')->group(function () {
         Route::post('verify', 'UsuariosController@userVerify');
     });
+    Route::prefix('doctors')->group(function () {
+        Route::post('search', 'DoctorsController@searchDoctor');
+    });
+    Route::prefix('cita')->group(function () {
+        Route::post('historial', 'CitaController@historial');
+    });
+
 });
 
-Route::prefix('doctors')->group(function () {
-    Route::post('search', 'DoctorsController@searchDoctor');
+
+/** APP CONTROL DE STOCK */
+
+Route::group(['middleware' => ['cors']], function () {
+    Route::prefix('users')->group(function () {
+        Route::post('verify', 'UsuariosController@userVerify');
+    });
+    Route::prefix('doctors')->group(function () {
+        Route::post('search', 'DoctorsController@searchDoctor');
+    });
+    Route::prefix('cita')->group(function () {
+        Route::post('historial', 'CitaController@historial');
+    });
+
 });
+
+
+
+
+
 
 Route::get('message', 'EmailController@sendEmail');
 
