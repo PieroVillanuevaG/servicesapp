@@ -128,7 +128,7 @@ class UsuariosController extends Controller
         try {
 
             $store_customer = DB::table('customer')
-                ->insert([
+                ->insertGetId([
                     "document" => $user,
                     "first_name" => $first_name,
                     "second_name" => $second_name,
