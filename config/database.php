@@ -63,6 +63,26 @@ return [
             ]) : [],
         ],
 
+        'dbstock' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_STOCK', '127.0.0.1'),
+            'port' => env('DB_PORT_STOCK', '3306'),
+            'database' => env('DB_DATABASE_STOCK', 'forge'),
+            'username' => env('DB_USERNAME_STOCK', 'forge'),
+            'password' => env('DB_PASSWORD_STOCK', ''),
+            'unix_socket' => env('DB_SOCKET_STOCK', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

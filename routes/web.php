@@ -5,6 +5,8 @@ use \App\Http\Controllers\UsuarioController;
 use \App\Http\Controllers\CustomerController;
 use \App\Http\Controllers\DoctorsController;
 use \App\Http\Controllers\CitaController;
+use \App\Http\Controllers\UserStockController;
+use \App\Http\Controllers\ProductController;
 use \App\Mail\MailController;
 /*
 |--------------------------------------------------------------------------
@@ -31,4 +33,7 @@ Route::resource('cita', CitaController::class);
 
 
 /** APP CONTROL DE STOCK */
+
+Route::resource('user2', UserStockController::class);
+Route::resource('products', ProductController::class);
 

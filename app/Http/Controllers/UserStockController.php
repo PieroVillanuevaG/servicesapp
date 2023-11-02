@@ -4,56 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use PDOException;
 
-class UsuariosController extends Controller
+class UserStockController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
 
-    public function userVerify(Request $request)
+    private $bd;
+
+    public function __construct()
     {
-
-        $user = $request->user;
-        $password = $request->password;
-        if (!$user) {
-            return response()->json(["status" => false, "message" => "Inserte el usuario"], 200);
-        }
-        if (!$password) {
-            return response()->json(["status" => false, "message" => "Inserte la contraseña"], 200);
-        }
-
-        $verify = DB::table('usuarios')
-            ->where("user", $user)
-            //->where("password", $hash_password)
-            ->first();
-
-        if (!$verify) {
-            return response()->json(["status" => false, "message" => "Las credenciales son incorrectas"], 200);
-        }
-
-        if (!password_verify($password, $verify->password)) {
-            return response()->json(["status" => false, "message" => "Las credenciales son incorrectas"], 200);
-        }
-
-        if (!$verify->status) {
-            return response()->json(["status" => false, "message" => "El usuario se encuentra inhabilitado"], 200);
-        }
-
-        $customer = DB::table('customer')
-            ->where("id", $verify->customer_id)
-            ->first();
-
-
-        return response()->json(["status" => true, "message" => "Usuario encontrado","data"=> $customer], 200);
-
+        $this->bd = DB::connection('dbstock');
     }
 
     public function index()
     {
-        return "Hola";
+        //
     }
 
     /**
@@ -61,6 +28,7 @@ class UsuariosController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -79,8 +47,6 @@ class UsuariosController extends Controller
         $gender = $request->gender;
         $terms = $request->terms;
         $type_document = $request->type_document;
-        $type_sure = $request->type_sure;
-        $fh_nacimiento = $request->fecha_nacimiento;
 
         if (!$terms) {
             return response()->json(["status" => false,
@@ -94,11 +60,6 @@ class UsuariosController extends Controller
             return response()->json(["status" => false,
                 "message" => "Digite el tipo de documento"], 200);
         }
-        if (!$type_sure) {
-            return response()->json(["status" => false,
-                "message" => "Digite el tipo de seguro"], 200);
-        }
-
         if (!$surnames) {
             return response()->json(["status" => false,
                 "message" => "Digite los apellidos"], 200);
@@ -116,7 +77,7 @@ class UsuariosController extends Controller
         $password = $request->password;
         $hash_password = password_hash($password, PASSWORD_DEFAULT);
 
-        $verify = DB::table('usuarios')
+        $verify = $this->bd->table('usuarios')
             ->where("user", $user)
             //->where("password", $hash_password)
             ->get();
@@ -127,8 +88,8 @@ class UsuariosController extends Controller
 
         try {
 
-            $store_customer = DB::table('customer')
-                ->insert([
+            $store_customer = $this->bd->table('customer')
+                ->insertGetId([
                     "document" => $user,
                     "first_name" => $first_name,
                     "second_name" => $second_name,
@@ -139,14 +100,12 @@ class UsuariosController extends Controller
                     "address" => $address,
                     "gender" => $gender,
                     "type_document" => $type_document,
-                    "type_sure" => $type_sure,
-                    "fecha_nacimiento" => $fh_nacimiento,
                     "status" => 1,
                     "created_date" => date("Y-m-d H:i:s")
                 ]);
 
-            $store_user = DB::table('usuarios')
-                ->insertGetId([
+            $store_user =$this->bd->table('usuarios')
+                ->insert([
                     "user" => $user,
                     "password" => $hash_password,
                     "status" => 1,
