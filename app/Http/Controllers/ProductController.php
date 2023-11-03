@@ -104,8 +104,12 @@ class ProductController extends Controller
             "total_cantidad" => $total_cantidad,
             "productos" => json_decode(json_encode($products), true)
         ];
-        $pdf = PDF::loadView('pdf.pdf', $data);
-        return $pdf->download('ejemplo.pdf');
+
+
+        return PDF::loadView("pdf.pdf", $data)->setPaper('a5', 'landscape')->download('Proforma.pdf');
+
+        //$pdf = PDF::loadView('pdf.pdf', $data);
+//        return $pdf->download('ejemplo.pdf');
     }
 
 
@@ -371,7 +375,7 @@ class ProductController extends Controller
             $insert_historial = $this->bd->table("historial_products")
                 ->insert($body_historial);
 
-            return response()->json(["status" => false,
+            return response()->json(["status" => true,
                 "message" => "Producto ingresado correctamente"], 200);
 
         } catch (Exception $e) {
