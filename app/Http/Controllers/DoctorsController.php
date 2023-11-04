@@ -104,7 +104,29 @@ class DoctorsController extends Controller
 
     public function index()
     {
-        //
+
+        try {
+            $doctors = DB::table("doctors")
+                ->where("status", 1)
+                ->get();
+
+            foreach($doctors as &$doctor){
+                $horarios = json_decode($doctor->horarios);
+                $new_horarios = [];
+                foreach($horarios as $fecha => $detail){
+                    $new_horarios[] = $fecha.implode(" - ", $detail);
+                }
+
+
+            }
+
+
+
+
+            return response()->json(["status" => true, "message" => "Lista de doctores obtenida", "data" => $doctors]);
+        } catch (\PDOException $e) {
+            return response()->json(["status" => false, "message" => "Surgió un error traer los doctores","data"=> $e], 200);
+        }
     }
 
     /**

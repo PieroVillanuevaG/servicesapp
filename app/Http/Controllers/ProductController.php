@@ -113,7 +113,7 @@ class ProductController extends Controller
                 "created_date" => date("Y-m-d H:i:s")
             ]);
 
-        return response()->json(["status" => true, "message" => "Salida registrada correctamente", "url"=> "//api/products/pdf".$insert_detail], 200);
+        return response()->json(["status" => true, "message" => "Salida registrada correctamente", "url"=> "/api/products/pdf/".$insert_detail], 200);
 
 
         //$pdf = PDF::loadView('pdf.pdf', $data);
