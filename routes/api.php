@@ -44,6 +44,7 @@ Route::group(['middleware' => ['cors']], function () {
 
     Route::prefix('products')->group(function () {
         Route::post('massive', 'ProductController@massive');
+        Route::post('search', 'ProductController@search');
         Route::post('salida', 'ProductController@salida');
         Route::get('pdf/{id}', 'ProductController@pdf');
     });

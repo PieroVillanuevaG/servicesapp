@@ -129,8 +129,27 @@ class ProductController extends Controller
             ->get();
 
         $data = json_decode($salida_detail[0]->data, true);
-        return PDF::loadView("pdf.pdf", $data)->setPaper('a5', 'landscape')->download('Proforma.pdf');
+        return PDF::loadView("pdf.pdf", $data)->download('FORMATO_SALIDA.pdf');
     }
+
+    public function search(Request $request)
+    {
+
+        $warehouse = $request->warehouse;
+        $name = $request->nombre;
+
+
+
+
+        $salida_detail = $this->bd->table("salida_detail")
+            ->select("*")
+            ->where("id", $id)
+            ->get();
+
+        $data = json_decode($salida_detail[0]->data, true);
+        return PDF::loadView("pdf.pdf", $data)->download('FORMATO_SALIDA.pdf');
+    }
+
 
 
     public function massive(Request $request)

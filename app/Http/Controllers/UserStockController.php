@@ -84,6 +84,7 @@ class UserStockController extends Controller
         $gender = $request->gender;
         $terms = $request->terms;
         $type_document = $request->type_document;
+        $fecha_nacimiento = $request->fecha_nacimiento;
 
         if (!$terms) {
             return response()->json(["status" => false,
@@ -138,7 +139,8 @@ class UserStockController extends Controller
                     "gender" => $gender,
                     "type_document" => $type_document,
                     "status" => 1,
-                    "created_date" => date("Y-m-d H:i:s")
+                    "created_date" => date("Y-m-d H:i:s"),
+                    "fecha_nacimiento" => $fecha_nacimiento,
                 ]);
 
             $store_user =$this->bd->table('usuarios')
