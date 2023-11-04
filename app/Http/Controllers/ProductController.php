@@ -135,7 +135,7 @@ class ProductController extends Controller
     public function search(Request $request)
     {
 
-        $warehouse = $request->warehouse;
+       /* $warehouse = $request->warehouse;
         $name = $request->nombre;
 
 
@@ -147,7 +147,7 @@ class ProductController extends Controller
             ->get();
 
         $data = json_decode($salida_detail[0]->data, true);
-        return PDF::loadView("pdf.pdf", $data)->download('FORMATO_SALIDA.pdf');
+        return PDF::loadView("pdf.pdf", $data)->download('FORMATO_SALIDA.pdf');*/
     }
 
 
