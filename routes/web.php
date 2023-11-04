@@ -7,6 +7,8 @@ use \App\Http\Controllers\DoctorsController;
 use \App\Http\Controllers\CitaController;
 use \App\Http\Controllers\UserStockController;
 use \App\Http\Controllers\ProductController;
+use \App\Http\Controllers\EspecialidadesController;
+use \App\Http\Controllers\CentrosController;
 use \App\Mail\MailController;
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,8 @@ Route::resource('user', UsuariosController::class);
 Route::resource('customer', CustomerController::class);
 Route::resource('doctor', DoctorsController::class);
 Route::resource('cita', CitaController::class);
+Route::resource('especialidades', EspecialidadesController::class);
+Route::resource('centros', CentrosController::class);
 
 
 /** APP CONTROL DE STOCK */

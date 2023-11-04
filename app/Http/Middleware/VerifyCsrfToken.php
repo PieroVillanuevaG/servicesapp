@@ -17,6 +17,8 @@ class VerifyCsrfToken extends Middleware
         'products',
         'customer',
         'cita',
-        'doctor'
+        'doctor',
+        'especialidades',
+        'centros'
     ];
 }

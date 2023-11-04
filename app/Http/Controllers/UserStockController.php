@@ -34,6 +34,43 @@ class UserStockController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    public function userVerify(Request $request)
+    {
+
+        $user = $request->user;
+        $password = $request->password;
+        if (!$user) {
+            return response()->json(["status" => false, "message" => "Inserte el usuario"], 200);
+        }
+        if (!$password) {
+            return response()->json(["status" => false, "message" => "Inserte la contraseña"], 200);
+        }
+
+        $verify = $this->bd->table('usuarios')
+            ->where("user", $user)
+            //->where("password", $hash_password)
+            ->first();
+
+        if (!$verify) {
+            return response()->json(["status" => false, "message" => "Las credenciales son incorrectas"], 200);
+        }
+
+        if (!password_verify($password, $verify->password)) {
+            return response()->json(["status" => false, "message" => "Las credenciales son incorrectas"], 200);
+        }
+
+        if (!$verify->status) {
+            return response()->json(["status" => false, "message" => "El usuario se encuentra inhabilitado"], 200);
+        }
+
+        $customer = $this->bd->table('customer')
+            ->where("id", $verify->customer_id)
+            ->first();
+
+        return response()->json(["status" => true, "message" => "Usuario encontrado","data"=> $customer], 200);
+
+    }
+
     public function store(Request $request)
     {
         $user = $request->document;

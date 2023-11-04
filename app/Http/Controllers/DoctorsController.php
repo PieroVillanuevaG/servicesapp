@@ -110,14 +110,30 @@ class DoctorsController extends Controller
                 ->where("status", 1)
                 ->get();
 
+            $traductor_fecha = [
+                "d"=> "DOMINGO",
+                "l" => "LUNES",
+                "ma" => "MARTES",
+                "mi" => "MIERCOLES",
+                "j" => "JUEVES",
+                "v" => "VIERNES",
+                "s" => "SABADO"
+            ];
+
+
             foreach($doctors as &$doctor){
                 $horarios = json_decode($doctor->horarios);
                 $new_horarios = [];
                 foreach($horarios as $fecha => $detail){
-                    $new_horarios[] = $fecha.implode(" - ", $detail);
+                    if(count($detail) == 0) continue;
+                    $new_hours = [];
+                    foreach($detail as &$h){
+                        if (intval($h) <= 12) $h = $h . " a.m.";
+                        else $h = $h . " p.m.";
+                    }
+                    $new_horarios[] = $traductor_fecha[$fecha].": ".implode(" - ", $detail);
                 }
-
-
+                $doctor->horario_actualizado = $new_horarios;
             }
 
 

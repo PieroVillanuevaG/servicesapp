@@ -38,6 +38,10 @@ Route::group(['middleware' => ['cors']], function () {
 /** APP CONTROL DE STOCK */
 
 Route::group(['middleware' => ['cors']], function () {
+    Route::prefix('users2')->group(function () {
+        Route::post('verify', 'UserStockController@userVerify');
+    });
+
     Route::prefix('products')->group(function () {
         Route::post('massive', 'ProductController@massive');
         Route::post('salida', 'ProductController@salida');
