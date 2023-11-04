@@ -29,7 +29,7 @@ class ProductController extends Controller
 
             return response()->json(["status" => true, "message" => "Lista de productos obtenida", "data" => $products]);
         } catch (\PDOException $e) {
-            return response()->json(["status" => false, "message" => "Surgió un error traer los productos"], 200);
+            return response()->json(["status" => false, "message" => "Surgió un error traer los productos","data"=> $e], 200);
         }
     }
 
@@ -97,6 +97,7 @@ class ProductController extends Controller
                 ->insert($body_historial);
         }
 
+
         $data = [
             "total" => $total,
             "documento" => $user,
@@ -105,11 +106,30 @@ class ProductController extends Controller
             "productos" => json_decode(json_encode($products), true)
         ];
 
+        $insert_detail = $this->bd->table("salida_detail")
+            ->insertGetId([
+                "data" => json_encode($data),
+                "user" => $user,
+                "created_date" => date("Y-m-d H:i:s")
+            ]);
 
-        return PDF::loadView("pdf.pdf", $data)->setPaper('a5', 'landscape')->download('Proforma.pdf');
+        return response()->json(["status" => true, "message" => "Salida registrada correctamente", "url"=> "//api/products/pdf".$insert_detail], 200);
+
 
         //$pdf = PDF::loadView('pdf.pdf', $data);
 //        return $pdf->download('ejemplo.pdf');
+    }
+
+    public function pdf($id)
+    {
+
+        $salida_detail = $this->bd->table("salida_detail")
+            ->select("*")
+            ->where("id", $id)
+            ->get();
+
+        $data = json_decode($salida_detail[0]->data, true);
+        return PDF::loadView("pdf.pdf", $data)->setPaper('a5', 'landscape')->download('Proforma.pdf');
     }
 
 
