@@ -96,7 +96,8 @@ class DoctorsController extends Controller
                 "titulo" => $detail->titulo,
                 "premios" => $detail->premios,
                 "sociedad" => $detail->sociedad,
-                "horarios" => $new_horarios
+                "horarios" => $new_horarios,
+                "id" => $detail->id
             ];
         }
         return response()->json(["status" => true, "message" => "Lista generada correctamente", "data" => $data], 200);
