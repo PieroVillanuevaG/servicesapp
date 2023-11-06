@@ -106,7 +106,7 @@ class CitaController extends Controller
             $email_rec = "cinthyamaryluz02@gmail.com";
 
             $send_message = app(EmailController::class)->sendEmail($email, $body, 'CITA REGISTRADA');
-            $send_message_recep = app(EmailController::class)->sendEmail($email_rec, $body, 'CITA REGISTRADA');
+            $send_message_recep = app(EmailController::class)->sendEmailRecep($email_rec, $body, 'CITA REGISTRADA');
             return response()->json(["status" => true, "message" => "Cita registrada correctamente"], 200);
         }catch (\Exception $e){
             return response()->json(["status" => false, "message" => "Surgió un error al registrar la cita, intente en unos minutos","error"=> $e->getMessage()], 200);
