@@ -91,6 +91,7 @@ class CitaController extends Controller
             "email" => $email,
             "created_date" => date("Y-m-d H:i:s"),
             "estado_cita"=> "PENDIENTE",
+            "lugar" => $request->lugar,
             "status" => 1
         ];
 
@@ -104,7 +105,7 @@ class CitaController extends Controller
             $send_message = app(EmailController::class)->sendEmail($email, $body, 'CITA REGISTRADA');
             return response()->json(["status" => true, "message" => "Cita registrada correctamente"], 200);
         }catch (\Exception $e){
-            return response()->json(["status" => false, "message" => "Surgió un error al registrar la cita, intente en unos minutos"], 200);
+            return response()->json(["status" => false, "message" => "Surgió un error al registrar la cita, intente en unos minutos","error"=> $e->getMessage()], 200);
         }
     }
 
