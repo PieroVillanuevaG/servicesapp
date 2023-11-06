@@ -56,7 +56,7 @@ class CitaController extends Controller
         $date = $request->date;
         $especiality = $request->especiality;
         $email = $request->email;
-        $horario = $request->horario;
+        //$horario = $request->horario;
 
         if (!$document) {
             return response()->json(["status" => false, "message" => "Es necesario el documento del paciente"], 200);
@@ -73,10 +73,12 @@ class CitaController extends Controller
         if (!$email) {
             return response()->json(["status" => false, "message" => "Es necesario el email del paciente"], 200);
         }
-        if (!$horario) {
+        /*if (!$horario) {
             return response()->json(["status" => false, "message" => "Es necesario el horario del medico"], 200);
-        }
+        }*/
 
+
+        $hora = date("H", strtotime($date));
 
         $body = [
             "document" => $document,
@@ -85,7 +87,7 @@ class CitaController extends Controller
             "medico_nombre" => $medico_nombre,
             "fecha" => $date,
             "especiality" => $especiality,
-            "horario" => $horario,
+            "horario" => intval($hora) >=12 ? $hora." PM": $hora." AM",
             "email" => $email,
             "created_date" => date("Y-m-d H:i:s"),
             "estado_cita"=> "PENDIENTE",
