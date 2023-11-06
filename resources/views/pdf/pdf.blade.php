@@ -108,10 +108,10 @@
         <table width="100%" style="border: 1px solid black">
             <tr>
                 <td rowspan="4" width="150" style="border-right: 1px solid black">
-                    <img class="text-center" src="https://fileserver.shalomcontrol.com/file-view/images/2023-10-31/MOGKT1PJIuWOjoRSp04blogo%20cesar%20lopez%20silva.png" alt="" width="100%">
+                    <img class="text-center" src="https://fileserver.shalomcontrol.com/file-view/images/2023-11-06/EiuTqQ4fUl3QwUbotBgdlogofarmacia.png" alt="" width="100%">
                 </td>
                 <td >
-                    <h4 class="text-center padding" style="border-bottom: 1px solid black">EMPRESA STOCK-IN S.A.C</h4>
+                    <h4 class="text-center padding" style="border-bottom: 1px solid black">CENTRO DE SALUD LAS BRISAS</h4>
                 </td>
             </tr>
             <tr>
