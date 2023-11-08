@@ -393,7 +393,8 @@ class ProductController extends Controller
                     "qty" => $qty,
                     "price_buying" => $price_buying,
                     "price_selling" => $price_selling,
-                    "created_date" => date("Y-m-d H:i:s")
+                    "created_date" => date("Y-m-d H:i:s"),
+                    "status"=> 1
                 ];
 
                 $insert_product = $this->bd->table("products")
