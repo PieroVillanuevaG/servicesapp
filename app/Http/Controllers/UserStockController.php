@@ -82,7 +82,7 @@ class UserStockController extends Controller
         $age = $request->age;
         $address = $request->address;
         $gender = $request->gender;
-        $terms = $request->terms;
+        $terms = 1;
         $type_document = $request->type_document;
         $fecha_nacimiento = $request->fecha_nacimiento;
 
