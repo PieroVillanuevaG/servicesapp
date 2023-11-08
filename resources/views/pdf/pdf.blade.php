@@ -173,8 +173,8 @@
                         <tr>
                             <td style="border-top: black 1px solid;padding: 0 20px">
                                 <p class="text-center" style="font-size:11px">
-                                    <b>DIANA AZUCENA</b><br>
-                                    <b style="font-size:11px">GERENTE GENERAL</b>
+                                    <b>LIC. ROCIO MARIA VILCAPOMA VEGA</b><br>
+                                    <b style="font-size:11px">JEFA DEL PUESTO DE SALUD</b>
                                 </p>
                             </td>
                         </tr>
